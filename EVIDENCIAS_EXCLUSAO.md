@@ -28,7 +28,7 @@ Ao tocar no ícone de lixeira da tarefa **Teste**, a lista não é alterada. Em 
 
 Ao acionar **Cancelar**, o diálogo é fechado e nenhuma alteração é aplicada. A tarefa **Teste** permanece na listagem, assim como as demais tarefas, seus prazos e seus estados de conclusão.
 
-![Listagem inalterada após o cancelamento da exclusão](docs/images/exclusao/3-resultado-ao-cancelar.png)
+![Listagem inalterada após o cancelamento da exclusão](docs/images/exclusao/1-lista-antes-da-exclusao.png)
 
 ---
 
@@ -36,7 +36,7 @@ Ao acionar **Cancelar**, o diálogo é fechado e nenhuma alteração é aplicada
 
 Ao tocar novamente no ícone de lixeira da mesma tarefa, o diálogo é exibido outra vez com o título correspondente. Isso demonstra que o cancelamento apenas limpa o estado de seleção, sem impedir uma nova tentativa.
 
-![Diálogo de confirmação exibido novamente para a mesma tarefa](docs/images/exclusao/4-nova-abertura-do-dialogo.png)
+![Diálogo de confirmação exibido novamente para a mesma tarefa](docs/images/exclusao/2-dialogo-aberto.png)
 
 ---
 
