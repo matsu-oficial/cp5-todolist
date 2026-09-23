@@ -1,6 +1,7 @@
 package matsu_oficial.com.github.todolist.ui
 
 import matsu_oficial.com.github.todolist.data.Tarefa
+import matsu_oficial.com.github.todolist.util.formatarDataHora
 import matsu_oficial.com.github.todolist.viewmodel.TarefaViewModel
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -30,6 +31,8 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextDecoration
@@ -141,6 +144,15 @@ private fun TarefaItem(
                         overflow = TextOverflow.Ellipsis
                     )
                 }
+                if (tarefa.dataHora != null) {
+                    val atrasada = tarefa.dataHora < System.currentTimeMillis() && !tarefa.concluida
+                    Text(
+                        text = formatarDataHora(tarefa.dataHora),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = if (atrasada) MaterialTheme.colorScheme.error else Color.Unspecified,
+                        fontWeight = if (atrasada) FontWeight.Bold else FontWeight.Normal
+                    )
+                }
             }
             IconButton(onClick = onDeletar) {
                 Icon(Icons.Default.Delete, contentDescription = "Deletar tarefa")
@@ -196,6 +208,42 @@ private fun TarefaItemConcluidaPreview() {
             titulo = "Enviar atividade",
             descricao = "Upload no portal da FIAP",
             concluida = true
+        ),
+        onCheckedChange = {},
+        onEditar = {},
+        onDeletar = {}
+    )
+}
+
+@Preview(showBackground = true, name = "Item com prazo futuro")
+@Composable
+private fun TarefaItemComPrazoPreview() {
+    val prazo = System.currentTimeMillis() + 86_400_000L
+    TarefaItem(
+        tarefa = Tarefa(
+            id = 3,
+            titulo = "Entregar atividade",
+            descricao = "Upload no portal da FIAP",
+            concluida = false,
+            dataHora = prazo
+        ),
+        onCheckedChange = {},
+        onEditar = {},
+        onDeletar = {}
+    )
+}
+
+@Preview(showBackground = true, name = "Item atrasado")
+@Composable
+private fun TarefaItemAtrasadaPreview() {
+    val prazo = System.currentTimeMillis() - 86_400_000L
+    TarefaItem(
+        tarefa = Tarefa(
+            id = 4,
+            titulo = "Boliche",
+            descricao = "Estar no shopping sem atraso",
+            concluida = false,
+            dataHora = prazo
         ),
         onCheckedChange = {},
         onEditar = {},

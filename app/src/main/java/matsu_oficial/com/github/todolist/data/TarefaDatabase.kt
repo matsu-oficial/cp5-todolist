@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [Tarefa::class], version = 1, exportSchema = false)
+@Database(entities = [Tarefa::class], version = 2, exportSchema = false)
 abstract class TarefaDatabase : RoomDatabase() {
 
     abstract fun tarefaDao(): TarefaDao
@@ -20,7 +20,8 @@ abstract class TarefaDatabase : RoomDatabase() {
                     context.applicationContext,
                     TarefaDatabase::class.java,
                     "tarefas.db"
-                ).build()
+                ).fallbackToDestructiveMigration(dropAllTables = true)
+                    .build()
                     .also { INSTANCE = it }
             }
         }
